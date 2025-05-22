@@ -5,7 +5,8 @@ const User = require('./models/User');
 require('dotenv').config();
 
 const app = express();
-const PORT = 5000;
+const PORT = process.env.PORT || 5000;
+
 
 // Middleware to parse JSON
 app.use(express.json());
@@ -18,8 +19,9 @@ mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTop
   .then(() => {
     console.log('✅ MongoDB connected!');
     app.listen(PORT, () => {
-      console.log(`🚀 Server is running on http://localhost:${PORT}`);
-    });
+  console.log(`🚀 Server is running on port ${PORT}`);
+});
+
   })
   .catch((err) => console.log('❌ DB connection error:', err));
 
